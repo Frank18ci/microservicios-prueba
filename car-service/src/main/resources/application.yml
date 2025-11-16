@@ -1,4 +1,25 @@
 spring:
   application:
     name: car-service
-
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+        health-check-path: /actuator/health
+        health-check-interval: 10s
+        prefer-ip-address: true
+        hostname: host.docker.internal
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_cars?useSSL=false&allowPublicKeyRetrieval=true&serverTimeZone=UTC&autoReconnect=true
+    username: root
+    password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    
+server:
+  port: 8081
